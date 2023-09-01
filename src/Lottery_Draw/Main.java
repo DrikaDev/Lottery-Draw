@@ -7,21 +7,25 @@ import java.util.Scanner;
 
 public class Main {
 	
+	//arrays que armazenam as informações
 	private static int[] ticketsCadastrados = new int[5];
 	private static double[] valoresTickets = new double[5];
 	private static double[] valorDoPremio = new double[5];
 
+	//esse método é o ponto de entrada, ele chama o método inicial() que exibe o Menu que processa a escolha do usuário
+	//depois chama o método keyPress() que guarda a entrada do usuário antes de retornar ao menu novamente.
 	public static void main(String[] args) {
 			inicial();
 			keyPress();			
 	}
 			
+	//exibe o menu de opções para o usuário, lê e guarda o input
 	private static void inicial() {
 		
 		Scanner leia = new Scanner (System.in);	
 		int codMenu;
 		
-		System.out.println("****** Loterias da Five ******");
+		System.out.println("\n******* Loteria *******");
 		System.out.println("    Faça aqui a sua aposta \n");
 		System.out.println("---------- Menu ----------\n");
 		System.out.println("1 - Cadastrar tickets");
@@ -35,6 +39,8 @@ public class Main {
 		leia.nextLine();
 		
 		switch(codMenu) {
+		
+		//cadastro dos tíckets com números de 1 a 10 a escolha do usuário
 		case 1:
 			System.out.println("\nCadastre 5 números de 1 a 10:");
 			for (int x = 0; x < 5; x++) {
@@ -46,6 +52,7 @@ public class Main {
 			keyPress();	
 			break;
 			
+		//visualização dos tíckets cadastrados e cálculo do valor total
 		case 2:
 			System.out.println("Os tickets cadastrados são: \n");
 			double valorTotal = 0.0;
@@ -60,17 +67,20 @@ public class Main {
             keyPress();    
             break;
             
+        //aqui ele simula um sorteio e determina os tickets vencedores
 		case 3:
 			visualizarResultado();
 								
 			keyPress();
 			break;
 			
+		//encerra o programa
 		case 4:
-			System.out.println("\n*** Loterias da Five agradece a sua participação! ***");
-			System.exit(0); //Encerra o programa
+			System.out.println("\n*** Loteria agradece a sua participação! ***");
+			System.exit(0); 
 			break;
 		
+		//mensagem para o caso o numero digitado escolhido pelo usuario não seja nenhum da lista do menu
 		default:
 			System.out.println("Código inválido.");
 			leia.nextLine();
@@ -80,7 +90,9 @@ public class Main {
 		leia.close();
 	}
 	
+	//aqui ele simula o sorteio com números aleatório de 01 a 10
 	private static void visualizarResultado() {
+		//usa a classe Random para garantir que não haja numero duplicado
 		Random random = new Random();
 		HashSet<Integer> numerosSorteados = new HashSet<>();
 		
@@ -116,10 +128,12 @@ public class Main {
         
 	}
 	
+	//aqui o programa aguarda o usuário pressionar Enter para voltar ao Menu
 	private static void keyPress() {
 
 		System.out.println("\n\nPressione ENTER para voltar ao menu.");
 
+		//o System.in.read espera a entrada do usuário
 		try {
 			System.in.read();
 
